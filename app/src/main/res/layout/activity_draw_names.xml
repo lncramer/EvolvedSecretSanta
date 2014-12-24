@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#006400"
+    tools:context="com.lncramer.secretsanta.DrawNamesActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/current_drawer"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="100px"/>
+
+    <Button
+        android:id="@+id/draw_button"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="DRAW NAME"
+        android:onClick="drawName"/>
+
+    <TextView
+        android:id="@+id/drawn_name"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="100px"/>
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Got it!"
+        android:onClick="clearNameAndUpdateDrawer"/>
+</LinearLayout>
