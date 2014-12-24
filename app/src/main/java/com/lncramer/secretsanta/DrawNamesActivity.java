@@ -27,6 +27,27 @@ public class DrawNamesActivity extends ActionBarActivity {
         updateName(currentDrawer, R.id.current_drawer);
     }
 
+    public void drawName(View view) {
+        String name = getRandomName(_names);
+
+        updateName(name, R.id.drawn_name);
+        updateConfirmButton(R.id.confirm_button, ButtonOptions.Show);
+        updateConfirmButton(R.id.draw_button, ButtonOptions.Hide);
+    }
+
+    public void confirmButtonClick(View view) {
+        // Clear last drawn name
+        updateName("", R.id.drawn_name);
+
+        // Update drawer
+        String newDrawer = getRandomName(_drawers);
+        updateName(newDrawer, R.id.current_drawer);
+
+        // Update button
+        updateConfirmButton(R.id.confirm_button, ButtonOptions.Hide);
+        updateConfirmButton(R.id.draw_button, ButtonOptions.Show);
+    }
+
     private void updateName(String currentDrawer, int id) {
         TextView textView = (TextView) findViewById(id);
         textView.setText(currentDrawer);
@@ -40,14 +61,6 @@ public class DrawNamesActivity extends ActionBarActivity {
         _drawers = allNames;
     }
 
-    public void drawName(View view) {
-        String name = getRandomName(_names);
-
-        updateName(name, R.id.drawn_name);
-        updateConfirmButton(R.id.confirm_button, ButtonOptions.Show);
-        updateConfirmButton(R.id.draw_button, ButtonOptions.Hide);
-    }
-
     private void updateConfirmButton(int id, ButtonOptions option) {
         Button button = (Button) findViewById(id);
 
@@ -57,19 +70,6 @@ public class DrawNamesActivity extends ActionBarActivity {
         else if (option == ButtonOptions.Hide) {
             button.setVisibility(View.INVISIBLE);
         }
-    }
-
-    public void clearNameAndUpdateDrawer(View view) {
-        // Clear last drawn name
-        updateName("", R.id.drawn_name);
-
-        // Update drawer
-        String newDrawer = getRandomName(_drawers);
-        updateName(newDrawer, R.id.current_drawer);
-
-        // Update button
-        updateConfirmButton(R.id.confirm_button, ButtonOptions.Hide);
-        updateConfirmButton(R.id.draw_button, ButtonOptions.Show);
     }
 
     private String getRandomName(List<String> names) {
