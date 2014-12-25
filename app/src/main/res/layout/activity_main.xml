@@ -17,7 +17,8 @@
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/edittext"
         android:hint="Enter a name"
         />
 
@@ -32,12 +33,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="addName"
+            android:background="#ADD8E6"
+            android:layout_marginRight="10dp"
             android:text="ADD"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="beginButtonClick"
+            android:background="#ADD8E6"
             android:text="BEGIN"/>
     </LinearLayout>
 </LinearLayout>

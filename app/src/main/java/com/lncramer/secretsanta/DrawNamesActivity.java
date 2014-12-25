@@ -19,7 +19,7 @@ import java.util.Set;
 public class DrawNamesActivity extends ActionBarActivity {
 
     private List<String> _names;
-    private Map<String, String> _pairings = new HashMap<>();
+    private Map<String, String> _pairings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,6 @@ public class DrawNamesActivity extends ActionBarActivity {
     }
 
     public void drawName(View view) {
-
         String currentDrawer = getCurrentDrawer();
         String name = getPairing(currentDrawer);
 
@@ -74,6 +73,7 @@ public class DrawNamesActivity extends ActionBarActivity {
         List<String> allNames = intent.getStringArrayListExtra(MainActivity.EXTRA_NAMES);
 
         _names = allNames;
+        _pairings = new HashMap<>();
     }
 
     private void updateButton(int id, ButtonOptions option) {
