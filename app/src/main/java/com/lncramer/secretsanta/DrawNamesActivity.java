@@ -7,14 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 
 public class DrawNamesActivity extends ActionBarActivity {
 
     private List<String> _names;
-    private List<String> _drawers;
+    private Map<String, String> _pairings = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,32 +28,43 @@ public class DrawNamesActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_draw_names);
 
-        String currentDrawer = getRandomName(_drawers);
-        updateName(currentDrawer, R.id.current_drawer);
+        String currentDrawer = getRandomDrawer();
+        updateName(R.id.current_drawer, currentDrawer);
     }
 
     public void drawName(View view) {
-        String name = getRandomName(_names);
 
-        updateName(name, R.id.drawn_name);
-        updateConfirmButton(R.id.confirm_button, ButtonOptions.Show);
-        updateConfirmButton(R.id.draw_button, ButtonOptions.Hide);
+        String currentDrawer = getCurrentDrawer();
+        String name = getPairing(currentDrawer);
+
+        _pairings.put(currentDrawer, name);
+
+        updateName(R.id.drawn_name, name);
+        updateButton(R.id.confirm_button, ButtonOptions.Show);
+        updateButton(R.id.draw_button, ButtonOptions.Hide);
     }
 
     public void confirmButtonClick(View view) {
         // Clear last drawn name
-        updateName("", R.id.drawn_name);
+        updateName(R.id.drawn_name, "");
+
+        if (!namesAreRemaining()) {
+            updateName(R.id.current_drawer, "Everyone has a secret santa!");
+            updateButton(R.id.confirm_button, ButtonOptions.Hide);
+            updateButton(R.id.draw_button, ButtonOptions.Hide);
+            return;
+        }
 
         // Update drawer
-        String newDrawer = getRandomName(_drawers);
-        updateName(newDrawer, R.id.current_drawer);
+        String newDrawer = getRandomDrawer();
+        updateName(R.id.current_drawer, newDrawer);
 
-        // Update button
-        updateConfirmButton(R.id.confirm_button, ButtonOptions.Hide);
-        updateConfirmButton(R.id.draw_button, ButtonOptions.Show);
+        // Update buttons
+        updateButton(R.id.confirm_button, ButtonOptions.Hide);
+        updateButton(R.id.draw_button, ButtonOptions.Show);
     }
 
-    private void updateName(String currentDrawer, int id) {
+    private void updateName(int id, String currentDrawer) {
         TextView textView = (TextView) findViewById(id);
         textView.setText(currentDrawer);
     }
@@ -58,10 +74,9 @@ public class DrawNamesActivity extends ActionBarActivity {
         List<String> allNames = intent.getStringArrayListExtra(MainActivity.EXTRA_NAMES);
 
         _names = allNames;
-        _drawers = allNames;
     }
 
-    private void updateConfirmButton(int id, ButtonOptions option) {
+    private void updateButton(int id, ButtonOptions option) {
         Button button = (Button) findViewById(id);
 
         if (option == ButtonOptions.Show) {
@@ -72,24 +87,49 @@ public class DrawNamesActivity extends ActionBarActivity {
         }
     }
 
-    private String getRandomName(List<String> names) {
-        int numberOfNames = names.size();
-
-        if (namesAreRemaining(numberOfNames)) {
-            int randomIndex = new Random().nextInt(numberOfNames);
-            String name = names.get(randomIndex);
-            names.remove(randomIndex);
-
-            return name;
-        }
-
-        updateConfirmButton(R.id.draw_button, ButtonOptions.Hide);
-        updateConfirmButton(R.id.confirm_button, ButtonOptions.Hide);
-        updateName("", R.id.current_drawer);
-        return "Everyone has a secret santa!";
+    private boolean namesAreRemaining() {
+        return _pairings.size() != _names.size();
     }
 
-    private boolean namesAreRemaining(int numberOfNames) {
-        return numberOfNames > 0;
+    private String getCurrentDrawer() {
+        TextView textView = (TextView) findViewById(R.id.current_drawer);
+        return textView.getText().toString();
+    }
+
+    private String getPairing(String currentDrawer) {
+        // Draw a name from _names that is not the same as currentDrawer or exists as a value in map
+        Collection<String> values = _pairings.values();
+
+        // Filter values out of names
+        List<String> names = makeCopyOfList(_names);
+        names.removeAll(values);
+        names.remove(currentDrawer);
+
+        // Get random name
+        int randomIndex = new Random().nextInt(names.size());
+        return names.get(randomIndex);
+    }
+
+    private String getRandomDrawer() {
+        // Draw a name from _names that doesn't exist as a key in the map (otherwise already drawn)
+        Set<String> keys = _pairings.keySet();
+
+        // Filter keys out of names
+        List<String> names = makeCopyOfList(_names);
+        names.removeAll(keys);
+
+        // Get random name
+        int randomIndex = new Random().nextInt(names.size());
+        return names.get(randomIndex);
+    }
+
+    private List<String> makeCopyOfList(List<String> list) {
+        List<String> listCopy = new ArrayList<>();
+
+        for (String str : list) {
+            listCopy.add(str);
+        }
+
+        return listCopy;
     }
 }
