@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:text="DRAW"
             android:background="#ADD8E6"
             android:onClick="drawName"/>
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="#00FF00"
             android:text="OK"
             android:onClick="confirmButtonClick"/>
