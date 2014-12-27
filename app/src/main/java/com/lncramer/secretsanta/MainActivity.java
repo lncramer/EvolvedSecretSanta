@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void beginButtonClick(View view) {
         if (_names.size() < 2) {
-            Toast toast = Toast.makeText(this, "Add at least two names before starting", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "Add at least two names before starting.", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -83,10 +83,10 @@ public class MainActivity extends ActionBarActivity {
         Toast toast = null;
 
         if (name.isEmpty()) {
-            toast = Toast.makeText(this, "Enter a name", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(this, "Name cannot be empty.", Toast.LENGTH_SHORT);
         }
         else if (_names.contains(name)) {
-            toast = Toast.makeText(this, name + " has already been added", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(this, name + " has already been added.", Toast.LENGTH_SHORT);
         }
 
         return toast;

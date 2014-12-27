@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -20,6 +21,10 @@ public class RowCreator implements ICreateRow {
     @Override
     public TableRow createRow(String name, Context context) {
         TableRow row = new TableRow(context);
+        row.setBaselineAligned(true);
+        row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                                      TableRow.LayoutParams.WRAP_CONTENT,
+                                                      1f));
 
         EditText textView = createTextView(name, context);
         Button buttonView = createRemoveButton(context);
@@ -47,10 +52,15 @@ public class RowCreator implements ICreateRow {
 
     private Button createRemoveButton(Context context) {
         Button buttonView = new Button(context);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
+        lp.setMargins(30, 10, 0, 0);
 
-        buttonView.setText("Remove");
-        buttonView.setGravity(Gravity.CENTER);
-        buttonView.getBackground().setColorFilter(Color.parseColor("#FF3333"), PorterDuff.Mode.DARKEN);
+        buttonView.setText("REMOVE");
+        buttonView.setLayoutParams(lp);
+//        buttonView.setGravity(Gravity.CENTER);
+//        buttonView.getBackground().setColorFilter(Color.parseColor("#FF3333"), PorterDuff.Mode.LIGHTEN);
+        buttonView.setBackgroundColor(Color.parseColor("#FF3333"));
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
