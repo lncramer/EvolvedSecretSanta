@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="green">#006400</string>
-    <string name="title_main_activity">Add Names</string>
+    <string name="title_main_activity">Secret Santa</string>
     <string name="title_activity_draw_names">Draw Names</string>
 
 </resources>

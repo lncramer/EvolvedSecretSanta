@@ -28,7 +28,7 @@ public class DrawNamesActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_draw_names);
 
-        String currentDrawer = getRandomDrawer();
+        String currentDrawer = getNextDrawer();
         updateName(R.id.current_drawer, currentDrawer);
     }
 
@@ -48,14 +48,14 @@ public class DrawNamesActivity extends ActionBarActivity {
         updateName(R.id.drawn_name, "");
 
         if (!namesAreRemaining()) {
-            updateName(R.id.current_drawer, "Everyone has a secret santa!");
+            updateName(R.id.current_drawer, "Everyone has a santa!");
             updateButton(R.id.confirm_button, ButtonOptions.Hide);
             updateButton(R.id.draw_button, ButtonOptions.Hide);
             return;
         }
 
         // Update drawer
-        String newDrawer = getRandomDrawer();
+        String newDrawer = getNextDrawer();
         updateName(R.id.current_drawer, newDrawer);
 
         // Update buttons
@@ -110,7 +110,7 @@ public class DrawNamesActivity extends ActionBarActivity {
         return names.get(randomIndex);
     }
 
-    private String getRandomDrawer() {
+    private String getNextDrawer() {
         // Draw a name from _names that doesn't exist as a key in the map (otherwise already drawn)
         Set<String> keys = _pairings.keySet();
 

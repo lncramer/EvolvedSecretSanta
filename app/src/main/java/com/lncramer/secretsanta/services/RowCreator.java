@@ -58,8 +58,6 @@ public class RowCreator implements ICreateRow {
 
         buttonView.setText("REMOVE");
         buttonView.setLayoutParams(lp);
-//        buttonView.setGravity(Gravity.CENTER);
-//        buttonView.getBackground().setColorFilter(Color.parseColor("#FF3333"), PorterDuff.Mode.LIGHTEN);
         buttonView.setBackgroundColor(Color.parseColor("#FF3333"));
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
