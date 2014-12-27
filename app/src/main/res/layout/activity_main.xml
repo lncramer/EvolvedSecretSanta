@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:background="@drawable/edittext"
+            android:background="@drawable/edit_text"
             android:hint="Enter a name"/>
 
         <Button

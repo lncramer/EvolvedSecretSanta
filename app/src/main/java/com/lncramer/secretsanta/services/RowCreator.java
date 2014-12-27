@@ -2,15 +2,16 @@ package com.lncramer.secretsanta.services;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.lncramer.secretsanta.MainActivity;
+import com.lncramer.secretsanta.R;
 
 /**
  * Created by Lucas on 12/26/2014.
@@ -32,6 +33,8 @@ public class RowCreator implements ICreateRow {
         EditText textView = new EditText(context);
 
         textView.setText(text);
+        textView.setBackgroundResource(R.drawable.edit_text);
+        textView.setGravity(Gravity.CENTER);
         textView.setKeyListener(null);
 
         return textView;
@@ -46,6 +49,8 @@ public class RowCreator implements ICreateRow {
         Button buttonView = new Button(context);
 
         buttonView.setText("Remove");
+        buttonView.setGravity(Gravity.CENTER);
+        buttonView.getBackground().setColorFilter(Color.parseColor("#FF3333"), PorterDuff.Mode.DARKEN);
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
