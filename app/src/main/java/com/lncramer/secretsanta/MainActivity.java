@@ -9,8 +9,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.lncramer.secretsanta.services.ICreateNameRow;
-import com.lncramer.secretsanta.services.NameRowCreator;
+import com.lncramer.secretsanta.services.ICreateRow;
+import com.lncramer.secretsanta.services.RowCreator;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
 
     public static final String EXTRA_NAMES = "com.lncramer.secretsanta.NAMES";
 
-    private ICreateNameRow _nameRowCreator = new NameRowCreator();
+    private ICreateRow _nameRowCreator = new RowCreator();
     private static ArrayList<String> _names = new ArrayList();
 
     @Override

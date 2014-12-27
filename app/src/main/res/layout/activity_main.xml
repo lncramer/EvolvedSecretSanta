@@ -43,11 +43,15 @@
             android:background="#ADD8E6"
             android:text="BEGIN"/>
     </LinearLayout>
-    
-    <TableLayout
-        android:layout_marginTop="10dp"
-        android:id="@+id/names_table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TableLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TableLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/names_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TableLayout>
+    </ScrollView>
 </LinearLayout>

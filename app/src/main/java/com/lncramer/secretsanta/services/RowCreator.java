@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -13,18 +15,26 @@ import com.lncramer.secretsanta.MainActivity;
 /**
  * Created by Lucas on 12/26/2014.
  */
-public class NameRowCreator implements ICreateNameRow {
+public class RowCreator implements ICreateRow {
     @Override
     public TableRow createRow(String name, Context context) {
         TableRow row = new TableRow(context);
 
-        TextView nameView = new EditText(context);
-        nameView.setText(name);
+        EditText textView = createTextView(name, context);
         Button buttonView = createRemoveButton(context);
 
-        addViewsToRow(row, nameView, buttonView);
+        addViewsToRow(row, textView, buttonView);
 
         return row;
+    }
+
+    private EditText createTextView(String text, Context context) {
+        EditText textView = new EditText(context);
+
+        textView.setText(text);
+        textView.setKeyListener(null);
+
+        return textView;
     }
 
     private void addViewsToRow(TableRow row, TextView nameView, Button buttonView) {
@@ -34,6 +44,7 @@ public class NameRowCreator implements ICreateNameRow {
 
     private Button createRemoveButton(Context context) {
         Button buttonView = new Button(context);
+
         buttonView.setText("Remove");
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +52,7 @@ public class NameRowCreator implements ICreateNameRow {
                 MainActivity.removeRow(view);
             }
         });
+
         return buttonView;
     }
 }
