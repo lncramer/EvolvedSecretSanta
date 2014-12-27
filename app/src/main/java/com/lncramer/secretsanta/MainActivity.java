@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lncramer.secretsanta.services.ICreateRow;
 import com.lncramer.secretsanta.services.RowCreator;
@@ -31,15 +32,40 @@ public class MainActivity extends ActionBarActivity {
     public void addName(View view) {
         EditText editText = (EditText) findViewById(R.id.name);
         String name = editText.getText().toString();
-        editText.setText("");
 
+        Toast toast = validateName(name);
+        if (toast != null) {
+            toast.show();
+            return;
+        }
+
+        editText.setText("");
         _names.add(name);
 
         TableRow row = _nameRowCreator.createRow(name, this);
         addToRowsTable(row);
     }
 
+    private Toast validateName(String name) {
+        Toast toast = null;
+
+        if (name.isEmpty()) {
+            toast = Toast.makeText(this, "Enter a name", Toast.LENGTH_SHORT);
+        }
+        else if (_names.contains(name)) {
+            toast = Toast.makeText(this, name + " has already been added", Toast.LENGTH_SHORT);
+        }
+
+        return toast;
+    }
+
     public void beginButtonClick(View view) {
+        if (_names.size() < 2) {
+            Toast toast = Toast.makeText(this, "Add at least two names before starting", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
         Intent intent = new Intent(this, DrawNamesActivity.class);
 
         intent.putStringArrayListExtra(EXTRA_NAMES, _names);
