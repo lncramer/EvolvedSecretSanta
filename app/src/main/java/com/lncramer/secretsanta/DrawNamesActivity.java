@@ -79,11 +79,13 @@ public class DrawNamesActivity extends ActionBarActivity {
     private void updateButton(int id, ButtonOptions option) {
         Button button = (Button) findViewById(id);
 
-        if (option == ButtonOptions.Show) {
-            button.setVisibility(View.VISIBLE);
-        }
-        else if (option == ButtonOptions.Hide) {
-            button.setVisibility(View.INVISIBLE);
+        switch (option) {
+            case Show:
+                button.setVisibility(View.VISIBLE);
+                break;
+            case Hide:
+                button.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 
