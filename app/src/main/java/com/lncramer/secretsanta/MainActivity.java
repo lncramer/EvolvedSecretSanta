@@ -46,19 +46,6 @@ public class MainActivity extends ActionBarActivity {
         addToRowsTable(row);
     }
 
-    private Toast validateName(String name) {
-        Toast toast = null;
-
-        if (name.isEmpty()) {
-            toast = Toast.makeText(this, "Enter a name", Toast.LENGTH_SHORT);
-        }
-        else if (_names.contains(name)) {
-            toast = Toast.makeText(this, name + " has already been added", Toast.LENGTH_SHORT);
-        }
-
-        return toast;
-    }
-
     public void beginButtonClick(View view) {
         if (_names.size() < 2) {
             Toast toast = Toast.makeText(this, "Add at least two names before starting", Toast.LENGTH_SHORT);
@@ -90,5 +77,18 @@ public class MainActivity extends ActionBarActivity {
     private void addToRowsTable(TableRow row) {
         TableLayout table = (TableLayout) findViewById(R.id.names_table);
         table.addView(row);
+    }
+
+    private Toast validateName(String name) {
+        Toast toast = null;
+
+        if (name.isEmpty()) {
+            toast = Toast.makeText(this, "Enter a name", Toast.LENGTH_SHORT);
+        }
+        else if (_names.contains(name)) {
+            toast = Toast.makeText(this, name + " has already been added", Toast.LENGTH_SHORT);
+        }
+
+        return toast;
     }
 }
