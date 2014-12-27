@@ -8,26 +8,25 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@drawable/logo"/>
-
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@drawable/edittext"
-        android:hint="Enter a name"
-        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:background="@drawable/edittext"
+            android:hint="Enter a name"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -44,4 +43,11 @@
             android:background="#ADD8E6"
             android:text="BEGIN"/>
     </LinearLayout>
+    
+    <TableLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/names_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TableLayout>
 </LinearLayout>
