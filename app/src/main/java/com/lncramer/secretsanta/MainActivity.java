@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.lncramer.secretsanta.services.ICreateNameRow;
 import com.lncramer.secretsanta.services.NameRowCreator;
@@ -19,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String EXTRA_NAMES = "com.lncramer.secretsanta.NAMES";
 
     private ICreateNameRow _nameRowCreator = new NameRowCreator();
-    private ArrayList<String> _names = new ArrayList();
+    private static ArrayList<String> _names = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,15 @@ public class MainActivity extends ActionBarActivity {
         TableRow row = (TableRow) view.getParent();
         TableLayout table = (TableLayout) row.getParent();
 
+        removeName(row);
         table.removeView(row);
+    }
+
+    private static void removeName(TableRow row) {
+        TextView textView = (TextView) row.getChildAt(0);
+        String name = textView.getText().toString();
+
+        _names.remove(name);
     }
 
     private void addToRowsTable(TableRow row) {
