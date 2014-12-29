@@ -28,11 +28,11 @@
             android:textSize="100px"/>
 
         <Button
-            android:id="@+id/draw_button"
+            android:id="@+id/button"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="DRAW"
             android:background="#ADD8E6"
             android:onClick="drawName"/>
@@ -43,17 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="#FFFFFF"
+            android:layout_marginTop="20dp"
             android:textSize="100px"/>
-
-        <Button
-            android:id="@+id/confirm_button"
-            android:visibility="invisible"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="#00FF00"
-            android:text="OK"
-            android:onClick="confirmButtonClick"/>
     </LinearLayout>
 </LinearLayout>

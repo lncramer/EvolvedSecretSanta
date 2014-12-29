@@ -1,23 +1,25 @@
 package com.lncramer.secretsanta;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import com.lncramer.secretsanta.services.IDrawNames;
+import com.lncramer.secretsanta.services.NameDrawer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 
 public class DrawNamesActivity extends ActionBarActivity {
 
+    private IDrawNames _nameDrawer = new NameDrawer();
     private List<String> _names;
     private Map<String, String> _pairings;
 
@@ -28,19 +30,48 @@ public class DrawNamesActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_draw_names);
 
-        String currentDrawer = getNextDrawer();
+        String currentDrawer = _nameDrawer.getNextDrawer(_names, _pairings);
         updateName(R.id.current_drawer, currentDrawer);
     }
 
     public void drawName(View view) {
         String currentDrawer = getCurrentDrawer();
-        String name = getPairing(currentDrawer);
+        String name = _nameDrawer.getPairing(currentDrawer, _names, _pairings);
 
         _pairings.put(currentDrawer, name);
 
         updateName(R.id.drawn_name, name);
-        updateButton(R.id.confirm_button, ButtonOptions.Show);
-        updateButton(R.id.draw_button, ButtonOptions.Hide);
+        updateButton(ButtonOptions.OK);
+    }
+
+    private void updateButton(ButtonOptions option) {
+        Button button = (Button) findViewById(R.id.button);
+
+        switch (option) {
+            case OK:
+                button.setText("OK");
+                button.setBackgroundColor(Color.parseColor("#7CFC00"));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        confirmButtonClick(v);
+                    }
+                });
+                break;
+            case Draw:
+                button.setText("DRAW");
+                button.setBackgroundColor(Color.parseColor("#ADD8E6"));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        drawName(v);
+                    }
+                });
+                break;
+            case Hide:
+                button.setVisibility(View.INVISIBLE);
+                break;
+        }
     }
 
     public void confirmButtonClick(View view) {
@@ -48,24 +79,24 @@ public class DrawNamesActivity extends ActionBarActivity {
         updateName(R.id.drawn_name, "");
 
         if (!namesAreRemaining()) {
-            updateName(R.id.current_drawer, "Everyone has a santa!");
-            updateButton(R.id.confirm_button, ButtonOptions.Hide);
-            updateButton(R.id.draw_button, ButtonOptions.Hide);
+            initializeEndState();
             return;
         }
 
-        // Update drawer
-        String newDrawer = getNextDrawer();
+        String newDrawer = _nameDrawer.getNextDrawer(_names, _pairings);
         updateName(R.id.current_drawer, newDrawer);
+        updateButton(ButtonOptions.Draw);
+    }
 
-        // Update buttons
-        updateButton(R.id.confirm_button, ButtonOptions.Hide);
-        updateButton(R.id.draw_button, ButtonOptions.Show);
+    private void initializeEndState() {
+        updateName(R.id.current_drawer, "Happy Holidays!");
+        updateButton(ButtonOptions.Hide);
     }
 
     private void updateName(int id, String currentDrawer) {
         TextView textView = (TextView) findViewById(id);
         textView.setText(currentDrawer);
+        textView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_fade_in));
     }
 
     private void initializeNames() {
@@ -76,19 +107,6 @@ public class DrawNamesActivity extends ActionBarActivity {
         _pairings = new HashMap<>();
     }
 
-    private void updateButton(int id, ButtonOptions option) {
-        Button button = (Button) findViewById(id);
-
-        switch (option) {
-            case Show:
-                button.setVisibility(View.VISIBLE);
-                break;
-            case Hide:
-                button.setVisibility(View.INVISIBLE);
-                break;
-        }
-    }
-
     private boolean namesAreRemaining() {
         return _pairings.size() != _names.size();
     }
@@ -96,42 +114,5 @@ public class DrawNamesActivity extends ActionBarActivity {
     private String getCurrentDrawer() {
         TextView textView = (TextView) findViewById(R.id.current_drawer);
         return textView.getText().toString();
-    }
-
-    private String getPairing(String currentDrawer) {
-        // Draw a name from _names that is not the same as currentDrawer or exists as a value in map
-        Collection<String> values = _pairings.values();
-
-        // Filter values out of names
-        List<String> names = makeCopyOfList(_names);
-        names.removeAll(values);
-        names.remove(currentDrawer);
-
-        // Get random name
-        int randomIndex = new Random().nextInt(names.size());
-        return names.get(randomIndex);
-    }
-
-    private String getNextDrawer() {
-        // Draw a name from _names that doesn't exist as a key in the map (otherwise already drawn)
-        Set<String> keys = _pairings.keySet();
-
-        // Filter keys out of names
-        List<String> names = makeCopyOfList(_names);
-        names.removeAll(keys);
-
-        // Get random name
-        int randomIndex = new Random().nextInt(names.size());
-        return names.get(randomIndex);
-    }
-
-    private List<String> makeCopyOfList(List<String> list) {
-        List<String> listCopy = new ArrayList<>();
-
-        for (String str : list) {
-            listCopy.add(str);
-        }
-
-        return listCopy;
     }
 }
