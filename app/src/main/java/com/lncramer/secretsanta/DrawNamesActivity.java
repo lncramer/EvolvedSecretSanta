@@ -44,6 +44,20 @@ public class DrawNamesActivity extends ActionBarActivity {
         updateButton(ButtonOptions.OK);
     }
 
+    public void confirmButtonClick(View view) {
+        // Clear last drawn name
+        updateName(R.id.drawn_name, "");
+
+        if (!namesAreRemaining()) {
+            initializeEndState();
+            return;
+        }
+
+        String newDrawer = _nameDrawer.getNextDrawer(_names, _pairings);
+        updateName(R.id.current_drawer, newDrawer);
+        updateButton(ButtonOptions.Draw);
+    }
+
     private void updateButton(ButtonOptions option) {
         Button button = (Button) findViewById(R.id.button);
 
@@ -72,20 +86,6 @@ public class DrawNamesActivity extends ActionBarActivity {
                 button.setVisibility(View.INVISIBLE);
                 break;
         }
-    }
-
-    public void confirmButtonClick(View view) {
-        // Clear last drawn name
-        updateName(R.id.drawn_name, "");
-
-        if (!namesAreRemaining()) {
-            initializeEndState();
-            return;
-        }
-
-        String newDrawer = _nameDrawer.getNextDrawer(_names, _pairings);
-        updateName(R.id.current_drawer, newDrawer);
-        updateButton(ButtonOptions.Draw);
     }
 
     private void initializeEndState() {
