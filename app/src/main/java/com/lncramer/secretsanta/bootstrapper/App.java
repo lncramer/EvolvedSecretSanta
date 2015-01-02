@@ -7,9 +7,6 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 
-/**
- * Created by Lucas on 1/1/2015.
- */
 public class App extends Application {
     private ObjectGraph objectGraph;
 

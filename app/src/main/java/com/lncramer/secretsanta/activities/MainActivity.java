@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-
 public class MainActivity extends ActionBarActivity {
     @Inject ICreateRow _rowCreator;
 

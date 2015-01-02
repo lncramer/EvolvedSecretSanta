@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/**
- * Created by Lucas on 12/28/2014.
- */
 public class NameDrawer implements IDrawNames {
     @Override
     public String getNextDrawer(List<String> names,

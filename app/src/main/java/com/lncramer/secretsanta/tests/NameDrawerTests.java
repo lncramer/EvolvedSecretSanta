@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Lucas on 1/2/2015.
- */
 public class NameDrawerTests extends InstrumentationTestCase {
     private NameDrawer _nameDrawer;
 

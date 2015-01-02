@@ -14,9 +14,6 @@ import com.lncramer.secretsanta.R;
 
 import javax.inject.Inject;
 
-/**
- * Created by Lucas on 12/26/2014.
- */
 public class RowCreator implements ICreateRow {
     @Inject
     public RowCreator() {}

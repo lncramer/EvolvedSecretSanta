@@ -7,9 +7,6 @@ import com.lncramer.secretsanta.services.NameDrawer;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by Lucas on 1/1/2015.
- */
 @Module(
         injects = DrawNamesActivity.class,
         complete = false

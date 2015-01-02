@@ -19,7 +19,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-
 public class DrawNamesActivity extends ActionBarActivity {
     @Inject IDrawNames _nameDrawer;
 
