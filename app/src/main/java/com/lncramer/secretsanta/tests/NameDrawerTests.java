@@ -7,6 +7,7 @@ import com.lncramer.secretsanta.services.NameDrawer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Lucas on 1/2/2015.
@@ -34,10 +35,28 @@ public class NameDrawerTests extends InstrumentationTestCase {
         List<String> theNames = new ArrayList<String>() {{
             add("A");
             add("B");
+            add("C");
         }};
 
         String thePairing = _nameDrawer.getPairing(theDrawer, theNames, new HashMap<String, String>());
 
-        assertEquals(thePairing, "B");
+        assertTrue( (thePairing.equals("B")) || thePairing.equals("C") );
+    }
+
+    public void test_should_filter_out_already_drawn_names() throws Exception {
+        String theDrawer = "C";
+        List<String> theNames = new ArrayList<String>() {{
+            add("A");
+            add("B");
+            add("C");
+        }};
+        Map<String, String> thePairings = new HashMap<String, String>() {{
+            put("A", "B");
+            put("B", "C");
+        }};
+
+        String thePairing = _nameDrawer.getPairing(theDrawer, theNames, thePairings);
+
+        assertEquals(thePairing, "A");
     }
 }
