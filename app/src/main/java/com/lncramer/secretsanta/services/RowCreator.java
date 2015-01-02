@@ -2,16 +2,14 @@ package com.lncramer.secretsanta.services;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.lncramer.secretsanta.MainActivity;
+import com.lncramer.secretsanta.activities.MainActivity;
 import com.lncramer.secretsanta.R;
 
 import javax.inject.Inject;

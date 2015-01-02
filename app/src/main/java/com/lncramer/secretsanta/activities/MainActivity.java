@@ -1,4 +1,4 @@
-package com.lncramer.secretsanta;
+package com.lncramer.secretsanta.activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +10,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lncramer.secretsanta.R;
+import com.lncramer.secretsanta.activities.DrawNamesActivity;
 import com.lncramer.secretsanta.bootstrapper.App;
 import com.lncramer.secretsanta.services.ICreateRow;
 
@@ -34,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void addName(View view) {
         EditText editText = (EditText) findViewById(R.id.name);
-        String name = editText.getText().toString();
+        String name = editText.getText().toString().trim();
 
         Toast toast = validateName(name);
         if (toast != null) {

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:name="com.lncramer.secretsanta.bootstrapper.App">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_main_activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +20,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DrawNamesActivity"
+            android:name=".activities.DrawNamesActivity"
             android:label="@string/title_activity_draw_names"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.lncramer.secretsanta.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
     </application>
 

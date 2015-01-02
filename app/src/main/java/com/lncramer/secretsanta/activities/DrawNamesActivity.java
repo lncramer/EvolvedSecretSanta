@@ -1,4 +1,4 @@
-package com.lncramer.secretsanta;
+package com.lncramer.secretsanta.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,9 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.lncramer.secretsanta.R;
 import com.lncramer.secretsanta.bootstrapper.App;
 import com.lncramer.secretsanta.services.IDrawNames;
-import com.lncramer.secretsanta.services.NameDrawer;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.lncramer.secretsanta.bootstrapper;
 
-import com.lncramer.secretsanta.MainActivity;
+import com.lncramer.secretsanta.activities.MainActivity;
 import com.lncramer.secretsanta.services.ICreateRow;
 import com.lncramer.secretsanta.services.RowCreator;
 
