@@ -10,23 +10,26 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lncramer.secretsanta.bootstrapper.App;
 import com.lncramer.secretsanta.services.ICreateRow;
-import com.lncramer.secretsanta.services.RowCreator;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 
 public class MainActivity extends ActionBarActivity {
+    @Inject ICreateRow _rowCreator;
 
     public static final String EXTRA_NAMES = "com.lncramer.secretsanta.NAMES";
-
-    private ICreateRow _nameRowCreator = new RowCreator();
     private static ArrayList<String> _names = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ((App) getApplication()).inject(this);
     }
 
     public void addName(View view) {
@@ -42,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         editText.setText("");
         _names.add(name);
 
-        TableRow row = _nameRowCreator.createRow(name, this);
+        TableRow row = _rowCreator.createRow(name, this);
         addToRowsTable(row);
     }
 

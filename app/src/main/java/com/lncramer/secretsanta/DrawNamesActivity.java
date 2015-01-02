@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.lncramer.secretsanta.bootstrapper.App;
 import com.lncramer.secretsanta.services.IDrawNames;
 import com.lncramer.secretsanta.services.NameDrawer;
 
@@ -16,16 +17,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 
 public class DrawNamesActivity extends ActionBarActivity {
+    @Inject IDrawNames _nameDrawer;
 
-    private IDrawNames _nameDrawer = new NameDrawer();
     private List<String> _names;
     private Map<String, String> _pairings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((App) getApplication()).inject(this);
+
         initializeNames();
 
         setContentView(R.layout.activity_draw_names);

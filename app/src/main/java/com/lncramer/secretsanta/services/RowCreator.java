@@ -14,10 +14,15 @@ import android.widget.TextView;
 import com.lncramer.secretsanta.MainActivity;
 import com.lncramer.secretsanta.R;
 
+import javax.inject.Inject;
+
 /**
  * Created by Lucas on 12/26/2014.
  */
 public class RowCreator implements ICreateRow {
+    @Inject
+    public RowCreator() {}
+
     @Override
     public TableRow createRow(String name, Context context) {
         TableRow row = new TableRow(context);
