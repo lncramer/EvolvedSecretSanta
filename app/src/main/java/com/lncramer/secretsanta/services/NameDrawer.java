@@ -39,7 +39,28 @@ public class NameDrawer implements IDrawNames {
 
         // Get random name
         int randomIndex = new Random().nextInt(namesCopy.size());
-        return namesCopy.get(randomIndex);
+        String drawnName = namesCopy.get(randomIndex);
+
+        if (oneNameIsRemaining(namesCopy) || !willCreateACycle(pairings, drawer, drawnName)) {
+            return drawnName;
+        }
+        return getPairing(drawer, names, pairings);
+    }
+
+    private boolean willCreateACycle(Map<String, String> pairings, String drawer, String drawnName) {
+        String currentName = drawnName;
+
+        while (pairings.containsKey(currentName)) {
+            if (pairings.get(currentName).equals(drawer))
+                return true;
+            currentName = pairings.get(currentName);
+        }
+
+        return false;
+    }
+
+    private boolean oneNameIsRemaining(List<String> namesCopy) {
+        return namesCopy.size() == 1;
     }
 
     private List<String> makeCopyOfList(List<String> list) {
