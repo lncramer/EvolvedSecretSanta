@@ -28,6 +28,7 @@ public class DrawNamesActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((App) getApplication()).inject(this);
 
         initializeNames();

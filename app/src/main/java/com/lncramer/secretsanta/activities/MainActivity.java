@@ -28,9 +28,8 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         ((App) getApplication()).inject(this);
+        setContentView(R.layout.activity_main);
     }
 
     public void addName(View view) {
