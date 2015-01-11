@@ -9,15 +9,10 @@ import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.lncramer.secretsanta.activities.MainActivity;
 import com.lncramer.secretsanta.R;
-
-import javax.inject.Inject;
+import com.lncramer.secretsanta.activities.MainActivity;
 
 public class RowCreator implements ICreateRow {
-    @Inject
-    public RowCreator() {}
-
     @Override
     public TableRow createRow(String name, Context context) {
         TableRow row = new TableRow(context);
